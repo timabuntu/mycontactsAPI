@@ -9,8 +9,11 @@ const contacts = [
     category_id: uuid(),
   },
 ];
-class ContactRepository {
 
+class ContactRepository {
+  findAll() {
+    return contacts;
+  }
 }
 
 module.exports = new ContactRepository();
