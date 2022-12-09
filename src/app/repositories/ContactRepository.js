@@ -1,4 +1,4 @@
-const { v4: uuid } = require('uuid');
+const { v4: uuid, v4 } = require('uuid');
 
 let contacts = [
   {
@@ -36,6 +36,22 @@ class ContactRepository {
     return new Promise((resolve) => {
       contacts = contacts.filter((contact) => contact.id !== id);
       resolve();
+    });
+  }
+
+  create({
+    name, email, phone, category_id,
+  }) {
+    return new Promise((resolve) => {
+      const newContact = {
+        id: v4(),
+        name,
+        email,
+        phone,
+        category_id,
+      };
+      contacts.push(newContact);
+      resolve(newContact);
     });
   }
 }
