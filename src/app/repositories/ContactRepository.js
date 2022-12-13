@@ -1,5 +1,7 @@
 const { v4: uuid, v4 } = require('uuid');
 
+const db = require('../../database');
+
 let contacts = [
   {
     id: uuid(),
