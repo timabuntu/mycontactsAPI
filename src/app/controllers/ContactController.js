@@ -5,6 +5,7 @@ class ContactController {
     const { orderBy } = request.query;
     const contacts = await ContactRepository.findAll(orderBy);
 
+    response.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
     response.json(contacts);
   }
 
@@ -31,11 +32,16 @@ class ContactController {
 
     const contactExists = await ContactRepository.findByEmail(email);
     if (contactExists) {
-      return response.status(400).json({ error: 'this e-mail is already in use' });
+      return response
+        .status(400)
+        .json({ error: 'this e-mail is already in use' });
     }
 
     const contact = await ContactRepository.create({
-      name, email, phone, category_id,
+      name,
+      email,
+      phone,
+      category_id,
     });
 
     response.json(contact);
@@ -58,11 +64,16 @@ class ContactController {
 
     const contactByEmail = await ContactRepository.findByEmail(email);
     if (contactByEmail && contactByEmail.id !== id) {
-      return response.status(400).json({ error: 'this e-mail is already in use' });
+      return response
+        .status(400)
+        .json({ error: 'this e-mail is already in use' });
     }
 
     const contact = await ContactRepository.update(id, {
-      name, email, phone, category_id,
+      name,
+      email,
+      phone,
+      category_id,
     });
 
     response.json(contact);
