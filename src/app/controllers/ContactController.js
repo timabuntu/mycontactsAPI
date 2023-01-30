@@ -5,7 +5,6 @@ class ContactController {
     const { orderBy } = request.query;
     const contacts = await ContactRepository.findAll(orderBy);
 
-    response.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
     response.json(contacts);
   }
 
